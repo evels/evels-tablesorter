@@ -9,7 +9,9 @@ export default function businesses(state = initialState, action) {
       return Object.assign({}, state, {
         data: action.data,
         sortedByName: action.sortedByName,
-        sortedDirection: action.sortedDirection });
+        sortedDirection: action.sortedDirection,
+        sectors: action.sectors,
+      });
       break;
     default:
       return state

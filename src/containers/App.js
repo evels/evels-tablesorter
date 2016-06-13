@@ -5,6 +5,8 @@ import * as Actions from '../actions'
 import * as labels from '../constants/Labels'
 
 import Table from '../components/Table'
+import Filter from '../components/Filter'
+import Results from '../components/Results'
 
 class App extends Component {
   constructor(props) {
@@ -21,18 +23,34 @@ class App extends Component {
       actions,
       businesses,
     } = this.props;
-    const table = (businesses.data) ? (
-      <Table
+    let table;
+    let results;
+    let filters;
+    if (businesses.data) {
+      table = (<Table
         {...actions}
         headers={labels.HEADERS}
         data={businesses.data}
         sortedBy={businesses.sortedByName}
         sortedDirection={businesses.sortedDirection}
-        />) : null;
+        />);
+      const totalBusinesses = businesses.data.length;
+      let totalMarketCap = 0;
+      for(var i = 0; i < businesses.data.length; i++) {
+        totalMarketCap += businesses.data[i].marketCap;
+      }
+      results = (<Results
+          total={totalBusinesses}
+          totalMarketCap={totalMarketCap.toFixed(2)} //floating point error problems...
+        />);
+      filters = (<Filter data={businesses.sectors}/>);
+    }
+
     return (
       <div className={'app'}>
-        hgjhg
         {table}
+        {results}
+        {filters}
       </div>
     )
   };

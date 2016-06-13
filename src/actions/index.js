@@ -12,7 +12,11 @@ export function getBusinessData(input, previous) {
 }
 
 function receiveBusinessData(json) {
+  let sectors = [];
   const data = json.map(d => {
+    if (sectors.indexOf(d['Sector']) === -1) {
+      sectors.push(d['Sector']);
+    }
     return {
       name: d['Name'],
       sector: d['Sector'],
@@ -24,6 +28,7 @@ function receiveBusinessData(json) {
     data,
     sortedByName: 'name',
     sortedDirection: 'ASC',
+    sectors,
   }
 }
 
