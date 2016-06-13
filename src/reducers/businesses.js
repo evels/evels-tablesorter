@@ -2,7 +2,7 @@ import { GET_BUSINESS_DATA, SET_DATA } from '../constants/ActionTypes'
 
 const initialState = {}
 
-export default function todos(state = initialState, action) {
+export default function businesses(state = initialState, action) {
   switch (action.type) {
     case GET_BUSINESS_DATA:
       return Object.assign({}, state, { data: action.data } );
