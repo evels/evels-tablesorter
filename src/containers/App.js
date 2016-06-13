@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as Actions from '../actions'
+import * as labels from '../constants/Labels'
 
 import Table from '../components/Table'
 
@@ -20,8 +21,14 @@ class App extends Component {
       actions,
       businesses,
     } = this.props;
-    const headers = {'name': 'Name', 'sector': 'Sector', 'marketCap': 'Market Cap'};
-    const table = (businesses.data) ? (<Table {...actions} headers={headers} data={businesses.data} />) : null;
+    const table = (businesses.data) ? (
+      <Table
+        {...actions}
+        headers={labels.HEADERS}
+        data={businesses.data}
+        sortedBy={businesses.sortedByName}
+        sortedDirection={businesses.sortedDirection}
+        />) : null;
     return (
       <div className={'app'}>
         hgjhg

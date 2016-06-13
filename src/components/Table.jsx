@@ -9,11 +9,19 @@ class Table extends Component {
     this._sortBy = this._sortBy.bind(this);
   }
 
-  _sortBy(key) {
-    console.log(key);
-    const { setData, data } = this.props;
-    const sorted = data.sort((a, b) => a[key].localeCompare(b[key]));
-    setData(sorted);
+  _sortBy(key, type) {
+    console.log(type);
+    const { setData, data, sortedBy, sortedDirection } = this.props;
+    let sortedData;
+    let direction;
+    if (sortedBy === key && sortedDirection === 'ASC') {
+      sortedData = (type === 'number') ? data.sort((a, b) => b[key] - a[key]) : data.sort((a, b) => b[key].localeCompare(a[key]));
+      direction = 'DESC';
+    } else {
+      sortedData = (type === 'number') ? data.sort((a, b) => a[key] - b[key]) : data.sort((a, b) => a[key].localeCompare(b[key]));
+      direction = 'ASC';
+    }
+    setData(sortedData, key, direction);
   }
 
   render() {
@@ -45,7 +53,9 @@ class Table extends Component {
 Table.propTypes = {
   setData: PropTypes.func.isRequired,
   data: PropTypes.array.isRequired,
-  headers: PropTypes.object.isRequired,
+  headers: PropTypes.array.isRequired,
+  sortedBy: PropTypes.string,
+  sortedDirection: PropTypes.string,
 }
 
 export default Table

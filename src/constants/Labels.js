@@ -2,13 +2,16 @@ export const HEADERS = [
   {
     name: 'name',
     display: 'Name',
+    type: 'text',
   },
   {
     name: 'sector',
     display: 'Sector',
+    type: 'text',
   },
   {
-    name: 'marketCat',
+    name: 'marketCap',
     display: 'Market Cap',
+    type: 'number',
   }
 ]

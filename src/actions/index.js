@@ -21,13 +21,17 @@ function receiveBusinessData(json) {
   });
   return {
     type: types.GET_BUSINESS_DATA,
-    data
+    data,
+    sortedByName: 'name',
+    sortedDirection: 'ASC',
   }
 }
 
-export function setData(data) {
+export function setData(data, sortedByName, sortedDirection) {
   return {
     type: types.SET_DATA,
-    data
+    data,
+    sortedByName,
+    sortedDirection
   }
 }

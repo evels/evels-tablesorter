@@ -13,10 +13,7 @@ class HeaderRow extends Component {
 
   render() {
     const { data } = this.props;
-    const headerRows = [];
-    for(var key in data) {
-      headerRows.push(<th key={key} value={key} onClick={this.props.sortFunc.bind(this, key)}>{data[key]}</th>)
-    }
+    const headerRows = data.map(d => <th key={d.name} value={d.name} onClick={this.props.sortFunc.bind(this, d.name, d.type)}>{d.display}</th>);
     return (
       <tr>
         {headerRows}
@@ -26,7 +23,7 @@ class HeaderRow extends Component {
 }
 
 HeaderRow.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.array.isRequired,
 }
 
 export default HeaderRow
