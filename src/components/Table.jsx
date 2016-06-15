@@ -10,7 +10,6 @@ class Table extends Component {
   }
 
   _sortBy(key, type) {
-    console.log(type);
     const { setData, data, sortedBy, sortedDirection } = this.props;
     let sortedData;
     let direction;
@@ -34,18 +33,18 @@ class Table extends Component {
       )
     });
     return (
-      <div>
-        <button onClick={() => this._sortBy('sector')}>click me</button>
-          <table>
-          	<thead>
-          		<HeaderRow data={this.props.headers} sortFunc={this._sortBy}/>
-          	</thead>
-          	<tbody>
-          		{rows}
-          	</tbody>
-          </table>
-
-      </div>
+      <table>
+      	<thead>
+      		<HeaderRow
+            data={this.props.headers}
+            sortFunc={this._sortBy}
+            sortedBy={this.props.sortedBy}
+            sortedDirection={this.props.sortedDirection}/>
+      	</thead>
+      	<tbody>
+      		{rows}
+      	</tbody>
+      </table>
     )
   }
 }

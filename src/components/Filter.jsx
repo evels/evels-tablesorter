@@ -6,9 +6,14 @@ class Filter extends Component {
   }
   render() {
     const { data } = this.props;
-    const checkboxes = data.sort().map((filter, index) => {
-      return <label><input type="checkbox" key={index} value={filter} />{filter}</label>
-    });
+    const checkboxes = [];
+    for (var key in data) {
+      checkboxes.push(<label key={key}><input
+        type="checkbox"
+        value={key}
+        checked={data[key]}
+        onChange={this.props.handleChecked.bind(this, key)}/>{key}</label>);
+    }
     return (
       <div>
         {checkboxes}
@@ -18,7 +23,8 @@ class Filter extends Component {
 }
 
 Filter.propTypes = {
-  data: PropTypes.array.isRequired,
+  data: PropTypes.object.isRequired,
+  handleChecked: PropTypes.func.isRequired,
 }
 
 export default Filter

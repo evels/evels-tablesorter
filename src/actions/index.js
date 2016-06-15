@@ -12,31 +12,25 @@ export function getBusinessData(input, previous) {
 }
 
 function receiveBusinessData(json) {
-  let sectors = [];
-  const data = json.map(d => {
-    if (sectors.indexOf(d['Sector']) === -1) {
-      sectors.push(d['Sector']);
-    }
-    return {
-      name: d['Name'],
-      sector: d['Sector'],
-      marketCap: d['Market Cap']
-    };
-  });
   return {
     type: types.GET_BUSINESS_DATA,
-    data,
-    sortedByName: 'name',
-    sortedDirection: 'ASC',
-    sectors,
+    data: json,
   }
 }
 
-export function setData(data, sortedByName, sortedDirection) {
+export function setData(data, sortedByName, sortedDirection, checkedSector) {
   return {
     type: types.SET_DATA,
-    data,
+    data: data,
     sortedByName,
     sortedDirection
+  }
+}
+
+export function setCheckedData(checkedSector) {
+  return {
+    type: types.SET_CHECKED_DATA,
+    checkedSector,
+
   }
 }

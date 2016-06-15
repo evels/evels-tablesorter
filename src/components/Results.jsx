@@ -7,9 +7,9 @@ class Results extends Component {
   render() {
     const { total, totalMarketCap } = this.props;
     return (
-      <div>
-        <p>Total: {total}</p>
-        <p>Total Market Cap: {totalMarketCap}</p>
+      <div className={'results'}>
+        <p><strong>Total:</strong> {total}</p>
+        <p><strong>Total Market Cap:</strong> {totalMarketCap}</p>
       </div>
     )
   }

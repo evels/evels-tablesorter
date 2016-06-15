@@ -1,12 +1,24 @@
 import React, { PropTypes, Component } from 'react'
+import classNames from 'classnames'
 
 class HeaderRow extends Component {
   constructor(props) {
     super(props);
   }
   render() {
-    const { data } = this.props;
-    const headerRows = data.map(d => <th key={d.name} value={d.name} onClick={this.props.sortFunc.bind(this, d.name, d.type)}>{d.display}</th>);
+    const { data, sortedBy, sortedDirection } = this.props;
+
+    const headerRows = data.map(d => {
+      const classes = classNames({
+        up: (sortedBy) ? sortedBy.toLowerCase() === d.name.replace(' ','').toLowerCase() && sortedDirection === 'ASC' : null,
+        down: (sortedBy) ? sortedBy.toLowerCase() === d.name.replace(' ','').toLowerCase() && sortedDirection === 'DESC' : null,
+      });
+    return <th
+      key={d.name}
+      className={classes}
+      value={d.name}
+      onClick={this.props.sortFunc.bind(this, d.name, d.type)}>{d.display}</th>
+    });
     return (
       <tr>
         {headerRows}

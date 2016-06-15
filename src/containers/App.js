@@ -11,11 +11,16 @@ import Results from '../components/Results'
 class App extends Component {
   constructor(props) {
     super(props);
+    this._sectorToggle = this._sectorToggle.bind(this);
   }
 
   componentDidMount() {
     const { actions } = this.props;
     actions.getBusinessData();
+  }
+
+  _sectorToggle(value) {
+    this.props.actions.setCheckedData(value);
   }
 
   render() {
@@ -41,16 +46,23 @@ class App extends Component {
       }
       results = (<Results
           total={totalBusinesses}
-          totalMarketCap={totalMarketCap.toFixed(2)} //floating point error problems...
+          totalMarketCap={totalMarketCap.toFixed(5)} //floating point error problems...choosing 5 since of Berkshire Highways
         />);
-      filters = (<Filter data={businesses.sectors}/>);
+      filters = (<Filter data={businesses.sectors} handleChecked={this._sectorToggle}/>);
     }
 
     return (
       <div className={'app'}>
-        {table}
-        {results}
-        {filters}
+        <div className={'main'}>
+          <h2>Constituents Financials Data</h2>
+          {table}
+        </div>
+        <div className={'sidebar'}>
+          <h2>Results</h2>
+          {results}
+          <h2>Filter by Sector</h2>
+          {filters}
+        </div>
       </div>
     )
   };
