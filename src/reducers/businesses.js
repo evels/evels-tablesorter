@@ -29,7 +29,6 @@ export default function businesses(state = initialState, action) {
         }
         return cleanedD;
       });
-      //sectors.sort((a,b) => Object.keys(a)[0].localeCompare(Object.keys(b)[0]));
       return Object.assign({}, state, {
         data: cleanedData,
         initialData: cleanedData,

@@ -42,7 +42,7 @@ class App extends Component {
       const totalBusinesses = businesses.data.length;
       let totalMarketCap = 0;
       for(var i = 0; i < businesses.data.length; i++) {
-        totalMarketCap += businesses.data[i].marketCap;
+        totalMarketCap += Number(businesses.data[i].marketCap);
       }
       results = (<Results
           total={totalBusinesses}
